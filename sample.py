@@ -1,0 +1,22 @@
+from tkinter import *
+top=Tk()
+top.geometry("1400x800")
+top.title("Text")
+top.config(bg="pink")
+welcome=Label(top,text="Alrifa",font=('TimeNewRoman',16,'italic'),bg="indigo",fg="silver")
+welcome.place(x=300,y=45)
+def login():
+    pp=Frame(top,bg="purple",height=1000,width=800)
+    pp.pack(fill=X)
+    label=Label(pp,text="Gopika",bg="white",fg="blue")
+    label.place(x=300,y=10)
+    box1=Entry(pp,text="",font=('calligrapher',16,'italic'),fg="black")
+    box1.place(x=250,y=100,width=200,height=35)
+    pp1=Button(pp,text="Back",font=('Timenewroman',16,'italic'),command=login.destroy())
+    pp1.place(x=400,y=200,width=200,height=50)
+box=Entry(top,text="",font=('calligrapher',16,'italic'),fg="black")
+box.place(x=300,y=100,width=200,height=35)
+button=Button(top,text="Login",font=('Timenewroman',16,'italic'),bg='blue',fg='white',activebackground="blue",activeforeground="red",command=login)
+
+button.place(x=400,y=200,width=200,height=50)
+top.mainloop()
