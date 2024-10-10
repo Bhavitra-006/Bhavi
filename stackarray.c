@@ -1,13 +1,10 @@
 #include <stdio.h>
 int stack[100],i,j,choice=0,n,top=-1;
-void push();
-void pop();
-void show();
 void main (){
     printf("Enter the number of elements in the stack ");
     scanf("%d",&n);
     printf("Stack operations using array");
-    while(choice != 4)
+    while(choice != 5)
     {
         printf("Chose one from the below options:-\n");
         printf("\n 1.Push\n 2.Pop \n3.Show \n4.Exit");
@@ -31,6 +28,11 @@ void main (){
                 break;
             }
             case 4:
+            {
+                peek();
+                break;
+            }
+            case 5:
             {
                 printf("Exiting....");
                 break;
@@ -70,4 +72,14 @@ void show()
         printf("%d\n",stack[i]);
     if(top == -1)
         printf("Stack is empty");
+}
+int peek()
+{
+
+    if(top==-1)
+    {
+        printf("Stack underflow.\n");
+        exit(1);
+    }
+    printf("Top element :%d\n",stack[top]);
 }
