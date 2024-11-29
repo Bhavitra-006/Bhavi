@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Team Member Information</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        background-color: #0a0f18; 
+        background-image: 
+        radial-gradient(circle at 20% 20%, rgba(50, 50, 60, 0.4), transparent), 
+        radial-gradient(circle at 75% 25%, rgba(50, 50, 60, 0.4), transparent), 
+        radial-gradient(circle at 50% 60%, rgba(80, 100, 255, 0.15), transparent), 
+        linear-gradient(to bottom, rgba(0, 10, 20, 0.8), rgba(0, 0, 0, 0.9)); 
+        background-size: cover;
+        overflow: hidden; 
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size:large;
+        text-align: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 2em;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        .container h2 {
+            margin-bottom: 1em;
+            color: #333;
+        }
+        .container input[type="text"],
+        .container input[type="tel"],
+        .container input[type="email"],
+        .container input[type="number"] {
+            width: 100%;
+            padding: 0.8em;
+            margin: 0.5em 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .container button {
+            width: 100%;
+            padding: 0.8em;
+            background-color: #007bff; /* Blue button */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .member-details {
+            display: none;
+            margin-top: 1em;
+            text-align: left;
+        }
+        .member-details h3 {
+            margin: 0.5em 0 0.2em;
+        }
+        .events {
+            margin-top: 1em;
+            text-align: left;
+        }
+        .events label {
+            display: block;
+            margin: 0.5em 0;
+        }
+    </style>
+    <script>
+        function showMemberDetails() {
+            const memberCount = document.getElementById('memberCount').value;
+            const detailsContainer = document.getElementById('memberDetails');
+            detailsContainer.innerHTML = ''; // Clear previous fields
+            
+            for (let i = 1; i <= memberCount; i++) {
+                detailsContainer.innerHTML += `
+                    <h3>Member ${i}</h3>
+                    <label>
+                        <input type="checkbox" name="member${i}_active" value="yes">
+                        Active Member
+                    </label>
+                    <input type="text" name="member${i}_name" placeholder="Name" required>
+                    <input type="tel" name="member${i}_contact" placeholder="Contact Number" required>
+                    <input type="email" name="member${i}_email" placeholder="Email" required>
+                `;
+            }
+            detailsContainer.style.display = memberCount > 0 ? 'block' : 'none';
+        }
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Team Member Information</h2>
+        <form action="/process-form" method="post">
+            <label for="memberCount">Number of Members:</label>
+            <input type="number" id="memberCount" name="memberCount" min="1" onchange="showMemberDetails()" required>
+            
+            <div id="memberDetails" class="member-details"></div>
+            
+            <div class="events">
+                <h3>Select Events:</h3>
+                <label><input type="checkbox" name="event1" value="Innvotion Sprout (1st years only)"> Innvotion Sprout (1st years only)</label>
+                <label><input type="checkbox" name="event2" value="Capture the Flag"> Capture the Flag</label>
+                <label><input type="checkbox" name="event3" value="Quiz to Quirk"> Quiz to Quirk</label>
+                <label><input type="checkbox" name="event4" value="IOT InnovateXpo"> IOT InnovateXpo</label>
+                <label><input type="checkbox" name="event5" value="Appventure"> Appventure</label>
+                <label><input type="checkbox" name="event6" value="UI Design/Game Development"> UI Design/Game Development</label>
+                <label><input type="checkbox" name="event7" value="ML/AI Fusion/Dashing Boards"> ML/AI Fusion/Dashing Boards</label>
+            </div>
+        </form>
+        <a href="submissionpage.html">
+            <button style="height: 50px;width: 200px;color:black;font-size: medium;"> Submit</button>
+        </a>
+    </div>
+
+</body>
+</html>
