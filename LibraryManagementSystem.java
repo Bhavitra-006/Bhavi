@@ -37,48 +37,54 @@ public class LibraryManagementSystem {
         users.put("U001", new User("U001"));
         users.put("U002", new User("U002"));
 
-        JFrame frame = new JFrame("Library Management System");
+        JFrame frame = new JFrame("Library Management System - Dark Mode");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 600);
+        frame.setSize(600, 700);
         frame.setLayout(new GridLayout(4, 1));
 
-        JPanel checkInOutPanel = new JPanel(new GridLayout(4, 2));
-        checkInOutPanel.setBorder(BorderFactory.createTitledBorder("Check-in/Check-out Books"));
-        JTextField bookIDField = new JTextField();
-        JTextField userIDField = new JTextField();
-        JButton checkOutButton = new JButton("Check Out");
-        JButton checkInButton = new JButton("Check In");
-        JLabel checkInOutMessage = new JLabel();
-        checkInOutPanel.add(new JLabel("Book ID:"));
+        Color backgroundColor = new Color(34, 34, 34); // Dark gray
+        Color panelColor = new Color(45, 45, 45); // Slightly lighter gray
+        Color textColor = new Color(230, 230, 250); // Light lavender
+        Color buttonColor = new Color(70, 130, 180); // Steel blue
+        Color borderColor = new Color(100, 149, 237); // Cornflower blue
+
+        JPanel checkInOutPanel = createPanel("Check-in/Check-out Books", panelColor, textColor, borderColor);
+        JTextField bookIDField = createTextField(backgroundColor, textColor);
+        JTextField userIDField = createTextField(backgroundColor, textColor);
+        JButton checkOutButton = createButton("Check Out", buttonColor, textColor);
+        JButton checkInButton = createButton("Check In", buttonColor, textColor);
+        JLabel checkInOutMessage = createLabel("", textColor);
+
+        checkInOutPanel.add(new JLabel("Book ID:", JLabel.RIGHT));
         checkInOutPanel.add(bookIDField);
-        checkInOutPanel.add(new JLabel("User ID:"));
+        checkInOutPanel.add(new JLabel("User ID:", JLabel.RIGHT));
         checkInOutPanel.add(userIDField);
         checkInOutPanel.add(checkOutButton);
         checkInOutPanel.add(checkInButton);
         checkInOutPanel.add(checkInOutMessage);
 
-        JPanel searchPanel = new JPanel(new GridLayout(4, 2));
-        searchPanel.setBorder(BorderFactory.createTitledBorder("Search for Books"));
-        JTextField searchTitleField = new JTextField();
-        JTextField searchAuthorField = new JTextField();
-        JTextField searchGenreField = new JTextField();
-        JButton searchButton = new JButton("Search");
-        JLabel searchResults = new JLabel();
-        searchPanel.add(new JLabel("Title:"));
+        JPanel searchPanel = createPanel("Search for Books", panelColor, textColor, borderColor);
+        JTextField searchTitleField = createTextField(backgroundColor, textColor);
+        JTextField searchAuthorField = createTextField(backgroundColor, textColor);
+        JTextField searchGenreField = createTextField(backgroundColor, textColor);
+        JButton searchButton = createButton("Search", buttonColor, textColor);
+        JLabel searchResults = createLabel("", textColor);
+
+        searchPanel.add(new JLabel("Title:", JLabel.RIGHT));
         searchPanel.add(searchTitleField);
-        searchPanel.add(new JLabel("Author:"));
+        searchPanel.add(new JLabel("Author:", JLabel.RIGHT));
         searchPanel.add(searchAuthorField);
-        searchPanel.add(new JLabel("Genre:"));
+        searchPanel.add(new JLabel("Genre:", JLabel.RIGHT));
         searchPanel.add(searchGenreField);
         searchPanel.add(searchButton);
         searchPanel.add(searchResults);
 
-        JPanel finePanel = new JPanel(new GridLayout(2, 1));
-        finePanel.setBorder(BorderFactory.createTitledBorder("Manage Fines"));
-        JTextField fineUserField = new JTextField();
-        JButton calculateFineButton = new JButton("Calculate Fine");
-        JLabel fineMessage = new JLabel();
-        finePanel.add(new JLabel("User ID:"));
+        JPanel finePanel = createPanel("Manage Fines", panelColor, textColor, borderColor);
+        JTextField fineUserField = createTextField(backgroundColor, textColor);
+        JButton calculateFineButton = createButton("Calculate Fine", buttonColor, textColor);
+        JLabel fineMessage = createLabel("", textColor);
+
+        finePanel.add(new JLabel("User ID:", JLabel.RIGHT));
         finePanel.add(fineUserField);
         finePanel.add(calculateFineButton);
         finePanel.add(fineMessage);
@@ -174,11 +180,38 @@ public class LibraryManagementSystem {
 
             for (Date dueDate : user.borrowedBooks.values()) {
                 if (today.after(dueDate)) {
-                    fine += (today.getTime() - dueDate.getTime()) / (1000 * 60 * 60 * 24);
+                    fine += (today.getTime() - dueDate.getTime()) / (1000 * 60 * 60 * 24); 
                 }
             }
 
             fineMessage.setText("Fine: $" + fine);
         });
+    }
+
+    private static JPanel createPanel(String title, Color background, Color textColor, Color borderColor) {
+        JPanel panel = new JPanel(new GridLayout(4, 2));
+        panel.setBackground(background);
+        panel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(borderColor), title));
+        return panel;
+    }
+
+    private static JTextField createTextField(Color background, Color textColor) {
+        JTextField textField = new JTextField();
+        textField.setBackground(background);
+        textField.setForeground(textColor);
+        return textField;
+    }
+
+    private static JButton createButton(String text, Color background, Color textColor) {
+        JButton button = new JButton(text);
+        button.setBackground(background);
+        button.setForeground(textColor);
+        return button;
+    }
+
+    private static JLabel createLabel(String text, Color textColor) {
+        JLabel label = new JLabel(text);
+        label.setForeground(textColor);
+        return label;
     }
 }
