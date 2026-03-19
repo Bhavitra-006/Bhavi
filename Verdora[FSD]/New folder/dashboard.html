@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farmer Dashboard</title>
+<link rel="stylesheet" href="dashboard.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+  <h2>🌱 Green Grocer</h2>
+  <button onclick="logout()">Logout</button>
+</header>
+
+<main class="dashboard">
+
+  <section class="card">
+    <h3>Welcome, <span id="name"></span> 👨‍🌾</h3>
+    <p>Farm: <strong id="farm"></strong></p>
+    <p>Location: <strong id="location"></strong></p>
+  </section>
+
+  <section class="stats">
+    <div class="stat">
+      <h2 id="products"></h2>
+      <p>Products</p>
+    </div>
+    <div class="stat">
+      <h2 id="orders"></h2>
+      <p>Orders Today</p>
+    </div>
+    <div class="stat">
+      <h2>₹ <span id="earnings"></span></h2>
+      <p>Earnings</p>
+    </div>
+  </section>
+  <section class="analytics">
+    <h3>📊 Sales Analytics</h3>
+    <canvas id="salesChart" width="400" height="200"></canvas>
+  </section>
+  <!--PRODUCT INVENTORY-->
+  <!--<section class="inventory">
+    <h3>📦 Product Inventory</h3>
+    <div class="add-product">
+      <input type="text" id="productName" placeholder="Product Name">
+      <input type="number" id="productQty" placeholder="Product Quantity">
+      <button onclick="addProduct()">Add Product</button>
+    </div>
+    <ul id="productList"></ul>
+  </section>
+-->
+  <section class="inventory">
+    <h3>📦 Product inventory</h3>
+    <input type="text" id="productName" placeholder="Product Name">
+    <input type="number" id="productYield" placeholder="Yield(KG)">
+    <input type="number" id="productPrice" placeholder="Selling price ₹ /kg">
+    <button onclick="addProduct()">Add Product</button>
+    <ul id="productList"></ul>
+    <p><strong>Total Revenue: </strong>₹<span id="totalRevenue">0</span></p>
+  </section>
+  <!--ORDERS UPDATION-->
+  <section class="orders-placed">
+    <h3>📦 Update Orders</h3>
+    <input type="number" id="ordersInput" placeholder="Enter orders">
+    <button onclick="updateOrders()">Update orders</button>
+  </section>
+  <!--FARM WEATHER API-->
+  <section class="weather">
+    <h3>☁️ Farm Weather</h3>
+    <input type="text" id="cityInput" placeholder="Enter City">
+    <button onclick="getWeather()">Check Weather</button>
+    <p id="weatherResult"></p>
+  </section>
+  <!--crop growth tracker-->
+  <section class="crop-growth">
+    <h3>🌱 Crop Growth Tracker</h3>
+    <select id="cropStage" onchange="updateGrowth()">
+      <option value="20">Seed Stage</option>
+      <option value="50">Growing Stage</option>
+      <option value="80">Flowering Stage</option>
+      <option value="100">Harvest Stage</option>
+    </select> 
+    <div class="progress-bar">
+      <div id="growthProgress"></div>
+    </div>
+    <p id="growthStatus">Seed Stage</p>
+  </section>
+  <!--CROP GROWTH VISUALISATION-->
+  <section class="crop-tracking">
+    <h3>🌱 Crop Growth Timeline</h3>
+    <div class="timeline">
+      <div class="stage">
+        <h4>🌱 Seed Stage</h4>
+        <p>Seeds Planted</p>
+      </div>
+      <div class="stage">
+        <h4>🌿 Growing Stage</h4>
+        <p>Plants Growing</p>
+      </div>
+      <div class="stage">
+        <h4>🌾 Harvest Stage</h4>
+        <p>Ready For Harvest</p>
+      </div>
+    </div>
+    <h3>📷 Upload Crop Images</h3>
+    <input type="file" id="cropImage" placeholder="Crop Image">
+    <button onclick="uploadImage()">Upload</button>
+    <div id="imageGallery"></div>
+  </section>
+  <!--FARMER MARKETPLACE-->
+  <section class="marketplace">
+    <h3>🛒 Marketplace Listing</h3>
+    <input type="text" id="marketProduct" placeholder="Product Name">
+    <input type="number" id="marketPrice" placeholder="Price ₹ ">
+    <button onclick="listProduct()">List Product</button>
+    <ul id="marketList"></ul>
+  </section>
+  <section class="analytics">
+    <h3>🛒 Market Place Analytics</h3>
+    <canvas id="marketChart" width="400" height="200"></canvas>
+  </section>
+
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="dashboard.js"></script>
+<script src="farmer_features.js"></script>
+</body>
+</html>

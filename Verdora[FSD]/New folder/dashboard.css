@@ -1,0 +1,177 @@
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+/* BODY */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f4f8f4;
+  color:#222;
+}
+
+/* NAVBAR */
+.navbar {
+  background: linear-gradient(135deg,#2e7d32,#43a047);
+  color: white;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow:0 3px 10px rgba(0,0,0,0.15);
+}
+
+.navbar h2{
+  letter-spacing:1px;
+  cursor:pointer;
+}
+
+/* BUTTON */
+button {
+  background: #fbc02d;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.05);
+  background:#f9a825;
+}
+
+/* DASHBOARD */
+.dashboard {
+  padding: 25px;
+}
+
+/* CARD */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 18px;
+  margin-bottom: 20px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.08);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+}
+
+/* STATS */
+.stats {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  flex: 1;
+  min-width:150px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow:0 3px 10px rgba(0,0,0,0.08);
+}
+
+/* SECTIONS */
+.analytics,
+.weather,
+.marketplace,
+.crop-growth{
+  margin-top:40px;
+  padding:20px;
+  background:#f7fff7;
+  border-radius:15px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* PROGRESS BAR */
+.progress-bar{
+  width:100%;
+  height:25px;
+  background:#e0e0e0;
+  border-radius:15px;
+  margin-top:15px;
+  overflow:hidden;
+}
+
+#growthProgress{
+  height:100%;
+  width:20%;
+  background: linear-gradient(90deg,#43a047,#66bb6a);
+  border-radius:15px;
+  transition:0.6s ease;
+}
+
+/* NAV ICONS */
+.nav-icons{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  font-size:18px;
+}
+
+.nav-icons span{
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.nav-icons span:hover{
+  transform:scale(1.2);
+}
+
+/* PROFILE */
+.profile{
+  position:relative;
+  cursor:pointer;
+}
+
+.profile-menu{
+  display:none;
+  position:absolute;
+  right:0;
+  top:35px;
+  background:white;
+  box-shadow:0 6px 18px rgba(0,0,0,0.2);
+  border-radius:10px;
+  width:150px;
+  overflow:hidden;
+  animation:fadeIn 0.2s ease;
+}
+
+.profile-menu p{
+  margin:0;
+  padding:12px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.profile-menu p:hover{
+  background:#f5f5f5;
+}
+
+/* ANIMATION */
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(-5px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .stats{
+    flex-direction:column;
+  }
+
+  .navbar{
+    flex-direction:column;
+    gap:10px;
+    text-align:center;
+  }
+}

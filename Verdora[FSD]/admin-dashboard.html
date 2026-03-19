@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Dashboard | Verdora</title>
+<link rel="stylesheet" href="admin.css">
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+
+<header class="top-header">
+  <div class="logo">Verdora Admin</div>
+
+  <div class="nav-icons">
+    <span onclick="logout()">Logout</span>
+  </div>
+</header>
+
+<div class="dashboard">
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <h3>Total Orders</h3>
+      <p id="orders">120</p>
+    </div>
+
+    <div class="stat">
+      <h3>Total Revenue</h3>
+      <p>₹<span id="revenue">45000</span></p>
+    </div>
+
+    <div class="stat">
+      <h3>Users</h3>
+      <p id="users">85</p>
+    </div>
+
+    <div class="stat">
+      <h3>Farmers</h3>
+      <p id="farmers">20</p>
+    </div>
+  </div>
+
+  <!-- GRAPHS -->
+  <div class="charts">
+
+    <div class="chart-box">
+      <h3>Orders Overview</h3>
+      <canvas id="ordersChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+      <h3>Revenue Growth</h3>
+      <canvas id="revenueChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+      <h3>Users vs Farmers</h3>
+      <canvas id="userChart"></canvas>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

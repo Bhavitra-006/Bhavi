@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VERDORA</title>
+
+<style>
+body{
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background:#f5f7f5;
+}
+
+/* HEADER */
+.header{
+  background:#2e7d32;
+  color:white;
+  padding:12px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+/* LOGO */
+.logo{
+  font-size:24px;
+  font-weight:bold;
+}
+
+/* SEARCH */
+.search input{
+  padding:10px 15px;
+  width:280px;
+  border-radius:25px;
+  border:none;
+  outline:none;
+}
+
+/* NAV */
+.nav-icons{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  font-size:14px;
+}
+
+.nav-icons span{
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.nav-icons span:hover{
+  text-decoration:underline;
+}
+
+/* PROFILE */
+.profile{
+  position:relative;
+  cursor:pointer;
+  font-size:18px;
+}
+
+.profile-menu{
+  display:none;
+  position:absolute;
+  right:0;
+  top:30px;
+  background:white;
+  color:black;
+  border-radius:8px;
+  width:150px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  overflow:hidden;
+}
+
+.profile-menu p{
+  padding:10px;
+  margin:0;
+  cursor:pointer;
+}
+
+.profile-menu p:hover{
+  background:#f1f1f1;
+}
+
+/* LAYOUT */
+.container{
+  display:flex;
+  height:90vh;
+}
+
+/* SIDEBAR */
+.sidebar{
+  width:130px;
+  background:white;
+  border-right:1px solid #ddd;
+  overflow:auto;
+}
+
+.cat{
+  padding:14px;
+  text-align:center;
+  cursor:pointer;
+  font-size:14px;
+  transition:0.3s;
+}
+
+.cat:hover{
+  background:#f1f1f1;
+}
+
+.cat.active{
+  background:#e8f5e9;
+  font-weight:bold;
+}
+
+/* MAIN */
+.main{
+  flex:1;
+  padding:15px;
+  overflow:auto;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:15px;
+}
+
+/* CARD */
+.card{
+  background:white;
+  padding:12px;
+  border-radius:12px;
+  box-shadow:0 3px 12px rgba(0,0,0,0.1);
+  text-align:center;
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+}
+
+.card img{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.en{font-weight:bold}
+.tan{font-size:13px;color:#555}
+.ta{font-size:14px;color:#2e7d32}
+
+.price{
+  color:#2e7d32;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+/* BUTTON */
+.btn{
+  margin-top:8px;
+  background:#2e7d32;
+  color:white;
+  border:none;
+  padding:7px 12px;
+  border-radius:6px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn:hover{
+  background:#1b5e20;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <div class="logo">VERDORA</div>
+
+  <div class="search">
+    <input type="text" placeholder="Search groceries..." oninput="searchData(this.value)">
+  </div>
+
+  <div class="nav-icons">
+    <span onclick="goHome()">Home</span>
+    <span onclick="showWishlist()">Wishlist</span>
+    <span onclick="showCart()">Cart (<span id="cartCount">0</span>)</span>
+
+    <div class="profile" onclick="toggleProfileMenu()">
+      Profile
+      <div class="profile-menu" id="profileMenu">
+        <p onclick="showProfile()">My Profile</p>
+        <p onclick="logout()">Logout</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="sidebar" id="sidebar"></div>
+  <div class="main" id="main"></div>
+</div>
+
+<script>
+
+/* IMAGE */
+function getImage(name){
+  return `https://source.unsplash.com/300x300/?${name},food`;
+}
+
+/* CART */
+let cartCount = 0;
+
+const data = [
+
+{
+name:"Millets",
+items:[
+{en:"Finger Millet",tan:"Ragi",ta:"ரகி"},
+{en:"Pearl Millet",tan:"Kambu",ta:"கம்பு"},
+{en:"Foxtail Millet",tan:"Thinai",ta:"தினை"},
+{en:"Little Millet",tan:"Samai",ta:"சாமை"},
+{en:"Kodo Millet",tan:"Kuthiravali",ta:"குதிரைவாலி"},
+{en:"Barnyard Millet",tan:"Oodhal",ta:"ஊதல்"},
+{en:"Proso Millet",tan:"Varagu",ta:"வரகு"},
+{en:"Browntop Millet",tan:"Browntop Millet",ta:"பிரௌன்டாப் மில்லெட்"}
+]
+},
+
+{
+name:"Pulses",
+items:[
+{en:"Bengal Gram",tan:"Kadalai Paruppu",ta:"கடலை பருப்பு"},
+{en:"Black Gram",tan:"Ulundu",ta:"உளுந்து"},
+{en:"Chickpeas",tan:"Kadalai",ta:"கடலை"},
+{en:"Split Chickpeas",tan:"Kadalai Paruppu",ta:"கடலை பருப்பு"},
+{en:"Green Peas",tan:"Pattani",ta:"பட்டாணி"},
+{en:"Horse Gram",tan:"Kollu",ta:"கொள்ளு"},
+{en:"Kidney Beans",tan:"Rajma",ta:"ராஜ்மா"},
+{en:"Red Lentils",tan:"Masoor Dal",ta:"மசூர் தால்"},
+{en:"Toor Dal",tan:"Thuvaram Paruppu",ta:"துவரம் பருப்பு"},
+{en:"Cowpea",tan:"Thatta Payaru",ta:"தட்டைப் பயறு"},
+{en:"Soybean",tan:"Soyabean",ta:"சோயாபீன்"},
+{en:"Moth Beans",tan:"Moth Beans",ta:"மொத் பயறு"},
+{en:"Dry Peas",tan:"Pattani",ta:"பட்டாணி"}
+]
+},
+
+{
+name:"Rice",
+items:[
+{en:"Maapillai Samba",tan:"Maapillai Samba",ta:"மாப்பிள்ளை சம்பா"},
+{en:"Seeraga Samba",tan:"Seeraga Samba",ta:"சீரக சம்பா"},
+{en:"Poongar",tan:"Poongar",ta:"பூங்கர்"},
+{en:"Thooyamalli",tan:"Thooyamalli",ta:"தூயமல்லி"},
+{en:"Karuppu Kavuni",tan:"Karuppu Kavuni",ta:"கருப்பு கவுனி"},
+{en:"Kaattu Yaanam",tan:"Kaattu Yaanam",ta:"காட்டு யானம்"},
+{en:"Moongil Arisi",tan:"Moongil Arisi",ta:"மூங்கில் அரிசி"},
+{en:"Kichili Samba",tan:"Kichili Samba",ta:"கிச்சிலி சம்பா"},
+{en:"Raktasali",tan:"Raktasali",ta:"ரக்தசாலி"},
+{en:"Kudavazhai",tan:"Kudavazhai",ta:"குடவாழை"},
+{en:"Navara",tan:"Navara",ta:"நவரா"},
+{en:"Karungkuruvai",tan:"Karungkuruvai",ta:"கருங்குருவை"}
+]
+},
+
+{
+name:"Spices & Herbs",
+items:[
+{en:"Ajwain Seeds",tan:"Omam",ta:"ஓமம்"},
+{en:"Bay Leaves",tan:"Biriyani Ilai",ta:"பிரியாணி இலை"},
+{en:"Black Pepper",tan:"Milagu",ta:"மிளகு"},
+{en:"Kalpasi",tan:"Kalpasi",ta:"கல்பாசி"},
+{en:"Cardamom",tan:"Elakkai",ta:"ஏலக்காய்"},
+{en:"Cloves",tan:"Grambu",ta:"கிராம்பு"},
+{en:"Cumin Seeds",tan:"Seeragam",ta:"சீரகம்"},
+{en:"Fennel Seeds",tan:"Sombu",ta:"சோம்பு"},
+{en:"Mustard Seeds",tan:"Kadugu",ta:"கடுகு"},
+{en:"Nigella Seeds",tan:"Karunjeeragam",ta:"கருஞ்சீரகம்"},
+{en:"Nutmeg",tan:"Jathikkai",ta:"ஜாதிக்காய்"},
+{en:"Poppy Seeds",tan:"Kasakasa",ta:"கசகசா"},
+{en:"Sesame Seeds",tan:"Ellu",ta:"எள்"},
+{en:"Star Anise",tan:"Thakkolam",ta:"தக்கோலம்"},
+{en:"Turmeric",tan:"Manjal",ta:"மஞ்சள்"},
+{en:"Asafoetida",tan:"Perungayam",ta:"பெருங்காயம்"},
+{en:"Saffron",tan:"Kungumapoo",ta:"குங்குமப்பூ"},
+{en:"Garam Masala",tan:"Garam Masala",ta:"கரம் மசாலா"},
+{en:"Coriander Leaves",tan:"Kothamalli",ta:"கொத்தமல்லி"},
+{en:"Mint Leaves",tan:"Pudina",ta:"புதினா"},
+{en:"Curry Leaves",tan:"Karuveppilai",ta:"கருவேப்பிலை"}
+]
+},
+
+{
+name:"Fruits",
+items:[
+{en:"Banana",tan:"Vazhaipazham",ta:"வாழைப்பழம்"},
+{en:"Mango",tan:"Maampazham",ta:"மாம்பழம்"},
+{en:"Papaya",tan:"Pappali",ta:"பப்பாளி"},
+{en:"Pineapple",tan:"Annachi",ta:"அன்னாசி"},
+{en:"Guava",tan:"Koyyapazham",ta:"கொய்யாப்பழம்"},
+{en:"Sapota",tan:"Chikoo",ta:"சப்போட்டா"},
+{en:"Pomegranate",tan:"Mathulam",ta:"மாதுளம்"},
+{en:"Jackfruit",tan:"Palapazham",ta:"பலாப்பழம்"},
+{en:"Coconut",tan:"Thengai",ta:"தேங்காய்"},
+{en:"Orange",tan:"Orange",ta:"ஆரஞ்சு"},
+{en:"Sweet Lime",tan:"Mosambi",ta:"மோசம்பி"},
+{en:"Lemon",tan:"Elumichai",ta:"எலுமிச்சை"},
+{en:"Grapes",tan:"Thiratchai",ta:"திராட்சை"},
+{en:"Apple",tan:"Apple",ta:"ஆப்பிள்"},
+{en:"Amla",tan:"Nellikai",ta:"நெல்லிக்காய்"},
+{en:"Jamun",tan:"Naval Pazham",ta:"நாவல் பழம்"}
+]
+},
+
+{
+name:"Vegetables",
+items:[
+
+/* Leafy */
+{en:"Spinach",tan:"Pasalai Keerai",ta:"பசலைக்கீரை"},
+{en:"Fenugreek Leaves",tan:"Venthaya Keerai",ta:"வெந்தய கீரை"},
+{en:"Mint",tan:"Pudina",ta:"புதினா"},
+{en:"Coriander Leaves",tan:"Kothamalli",ta:"கொத்தமல்லி"},
+
+/* Root */
+{en:"Potato",tan:"Urulai Kizhangu",ta:"உருளைக்கிழங்கு"},
+{en:"Sweet Potato",tan:"Sarkkarai Valli Kizhangu",ta:"சர்க்கரைவள்ளிக்கிழங்கு"},
+{en:"Carrot",tan:"Carrot",ta:"கேரட்"},
+{en:"Beetroot",tan:"Beetroot",ta:"பீட்ரூட்"},
+{en:"Radish",tan:"Mullangi",ta:"முள்ளங்கி"},
+{en:"Onion",tan:"Vengayam",ta:"வெங்காயம்"},
+{en:"Garlic",tan:"Poondu",ta:"பூண்டு"},
+{en:"Ginger",tan:"Inji",ta:"இஞ்சி"},
+
+/* Other */
+{en:"Tomato",tan:"Thakkali",ta:"தக்காளி"},
+{en:"Brinjal",tan:"Kathirikai",ta:"கத்தரிக்காய்"},
+{en:"Cucumber",tan:"Vellarikkai",ta:"வெள்ளரிக்காய்"},
+{en:"Capsicum",tan:"Kudai Milagai",ta:"குடைமிளகாய்"},
+{en:"Green Chilli",tan:"Pachai Milagai",ta:"பச்சை மிளகாய்"},
+{en:"Pumpkin",tan:"Poosanikai",ta:"பூசணிக்காய்"},
+{en:"Bottle Gourd",tan:"Suraikkai",ta:"சுரைக்காய்"},
+{en:"Bitter Gourd",tan:"Pavakkai",ta:"பாகற்காய்"},
+{en:"Drumstick",tan:"Murungakkai",ta:"முருங்கைக்காய்"},
+{en:"Beans",tan:"Beans",ta:"பீன்ஸ்"},
+{en:"Mushroom",tan:"Kaalan",ta:"காளான்"},
+{en:"Cabbage",tan:"Muttaikose",ta:"முட்டைக்கோஸ்"},
+{en:"Cauliflower",tan:"Pookose",ta:"பூக்கோஸ்"}
+
+]
+}
+
+];
+
+let current=0;
+
+/* SIDEBAR */
+function renderSidebar(){
+  sidebar.innerHTML = data.map((c,i)=>`
+    <div class="cat ${i===current?'active':''}" onclick="selectCat(${i})">
+      ${c.name}
+    </div>
+  `).join('');
+}
+
+/* PRODUCTS */
+function renderProducts(list){
+  main.innerHTML = `
+  <div class="grid">
+    ${list.map(item=>`
+      <div class="card" onclick="openProduct('${item.en}')">
+        <img src="${getImage(item.en)}">
+        <div class="en">${item.en}</div>
+        <div class="tan">${item.tan}</div>
+        <div class="ta">${item.ta}</div>
+        <div class="price">₹${Math.floor(Math.random()*100+30)}</div>
+        <button class="btn" onclick="event.stopPropagation(); addToCart('${item.en}')">Add</button>
+      </div>
+    `).join('')}
+  </div>`;
+}
+
+/* CATEGORY */
+function selectCat(i){
+  current=i;
+  renderSidebar();
+  renderProducts(data[i].items);
+}
+
+/* SEARCH */
+function searchData(q){
+  q=q.toLowerCase();
+  let results=[];
+
+  data.forEach(cat=>{
+    cat.items.forEach(item=>{
+      if(item.en.toLowerCase().includes(q) || item.tan.toLowerCase().includes(q)){
+        results.push(item);
+      }
+    });
+  });
+
+  renderProducts(results);
+}
+
+/* CART */
+function addToCart(item){
+  cartCount++;
+  document.getElementById("cartCount").innerText = cartCount;
+  alert(item+" added to Cart");
+}
+
+/* PRODUCT PAGE */
+function openProduct(name){
+  alert("Open product page for "+name);
+}
+
+/* PROFILE */
+function toggleProfileMenu(){
+  let menu=document.getElementById("profileMenu");
+  menu.style.display = menu.style.display==="block"?"none":"block";
+}
+
+/* CLOSE DROPDOWN */
+document.addEventListener("click", function(e){
+  let profile=document.querySelector(".profile");
+  let menu=document.getElementById("profileMenu");
+
+  if(!profile.contains(e.target)){
+    menu.style.display="none";
+  }
+});
+
+/* NAV */
+function goHome(){
+  renderProducts(data[current].items);
+}
+
+function showCart(){
+  alert("Cart Page (next step)");
+}
+
+function showWishlist(){
+  alert("Wishlist Page (next step)");
+}
+
+function showProfile(){
+  alert("Profile Page (next step)");
+}
+
+function logout(){
+  alert("Logged out");
+}
+
+/* INIT */
+renderSidebar();
+renderProducts(data[0].items);
+
+</script>
+
+</body>
+</html>

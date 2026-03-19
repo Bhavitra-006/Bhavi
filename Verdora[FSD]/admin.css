@@ -1,0 +1,89 @@
+/* RESET */
+body{
+  margin:0;
+  font-family:'Segoe UI', sans-serif;
+  background:#f5f7f5;
+}
+
+/* LOGIN */
+.login-container{
+  width:300px;
+  margin:120px auto;
+  background:white;
+  padding:30px;
+  border-radius:15px;
+  text-align:center;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.login-container input{
+  width:90%;
+  margin:10px 0;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+.login-container button{
+  background:#2e7d32;
+  color:white;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  width:100%;
+  cursor:pointer;
+}
+
+/* HEADER */
+.top-header{
+  background:#2e7d32;
+  color:white;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+}
+
+.logo{
+  font-weight:bold;
+}
+
+.nav-icons span{
+  cursor:pointer;
+}
+
+/* DASHBOARD */
+.dashboard{
+  padding:20px;
+}
+
+/* STATS */
+.stats{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.stat{
+  flex:1;
+  min-width:150px;
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  text-align:center;
+  box-shadow:0 3px 10px rgba(0,0,0,0.08);
+}
+
+/* CHARTS */
+.charts{
+  margin-top:30px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
+  gap:20px;
+}
+
+.chart-box{
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}

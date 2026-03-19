@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farmer Login | Green Grocer</title>
+
+<style>
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Scene container */
+.scene {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* Background image */
+.background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  z-index: 1;
+}
+
+/* Breeze effect on field */
+.field {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  animation: breeze 6s ease-in-out infinite;
+  transform-origin: bottom center;
+  will-change: transform;
+}
+
+@keyframes breeze {
+  0%   { transform: rotate(0deg); }
+  50%  { transform: rotate(0.4deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Clouds */
+/*.cloud {
+  position: absolute;
+  width: 200px;
+  height: 110px;
+  background: url("cloud.png") no-repeat center / contain;
+  opacity: 0.75;
+  z-index: 3;
+  animation: moveClouds linear infinite;
+  will-change: transform;
+}
+
+.cloud1 {
+  left: -250px;
+  top: 12%;
+  animation-duration: 60s;
+}
+
+.cloud2 {
+  left: -350px;
+  top: 22%;
+  animation-duration: 90s;
+}
+
+@keyframes moveClouds {
+  from { transform: translateX(0); }
+  to   { transform: translateX(160vw); }
+}
+
+/* Golden sunlight overlay */
+.scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at right center,
+    rgba(255, 200, 120, 0.22),
+    transparent 60%);
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* 🌟 PREMIUM GLASS LOGIN BOX */
+.login-box {
+  position: absolute;
+  right: 6%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 380px;
+  padding: 42px 36px;
+  border-radius: 22px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.35),
+    rgba(255, 255, 255, 0.15)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.5);
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+  z-index: 10;
+  text-align: center;
+
+  animation: floatBox 6s ease-in-out infinite;
+}
+
+/* Floating animation */
+@keyframes floatBox {
+  0%   { transform: translateY(-50%); }
+  50%  { transform: translateY(-54%); }
+  100% { transform: translateY(-50%); }
+}
+
+/* Glass blur if supported */
+@supports ((-webkit-backdrop-filter: blur(14px)) or (backdrop-filter: blur(14px))) {
+  .login-box {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.28),
+      rgba(255, 255, 255, 0.12)
+    );
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+}
+
+/* Light reflection */
+.login-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  border-radius: 22px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.45),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* Inputs */
+.login-box input {
+  width: 100%;
+  padding: 13px;
+  margin: 14px 0;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.6);
+  outline: none;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.login-box input:focus {
+  background: rgba(255,255,255,0.75);
+  border-color: #66bb6a;
+  box-shadow: 0 0 0 2px rgba(102,187,106,0.3);
+}
+
+/* Button */
+.login-box button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 18px;
+  background: linear-gradient(135deg, #43a047, #2e7d32);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+.login-box button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* Title */
+.login-box h2 {
+  color: #1b5e20;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+/* Footer text */
+.login-box p {
+  margin-top: 15px;
+  font-size: 13px;
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .login-box {
+    right: 50%;
+    transform: translate(50%, -50%);
+    width: 90%;
+    max-width: 360px;
+    padding: 35px 30px;
+  }
+}
+</style>
+</head>
+
+
+
+   
+
+<body>
+
+<div class="scene">
+
+  <!-- Clouds -->
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+
+  <!-- Field Background -->
+  <div class="field">
+    <img src="farmer_bg.png" class="background" alt="" aria-hidden="true">
+  </div>
+
+  <!-- Premium Login Box -->
+  <div class="login-box">
+    <h2>Farmer Login</h2>
+
+    <form id="loginForm">
+      <input type="text" id="farmerId" placeholder="Farmer ID" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <p style="font-family: Verdana, Geneva, Tahoma, sans-serif;"><i>Verdora</i></p>
+  </div>
+
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const form = document.getElementById("loginForm");
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const farmerId = document.getElementById("farmerId").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    const farmersDB = {
+      farmer01: {
+        name: "Ramesh",
+        farm: "Green Valley Farm",
+        location: "Salem",
+        products: 0,
+        orders: 0,
+        earnings: 0
+      }
+    };
+
+    if (farmersDB[farmerId] && password === "1234") {
+
+      localStorage.setItem("farmerData", JSON.stringify(farmersDB[farmerId]));
+
+      console.log("Login success");
+
+      window.location.href = "dashboard.html";
+
+    } else {
+      alert("Invalid Farmer ID or Password");
+    }
+
+  });
+
+});
+</script>
+
+</body>
+</html>

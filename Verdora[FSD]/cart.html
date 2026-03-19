@@ -1,0 +1,33 @@
+<div class="page">
+<h2>🛒 My Cart</h2>
+<div id="cartItems"></div>
+<h3>Total: ₹<span id="total"></span></h3>
+<button onclick="goCheckout()">Checkout</button>
+</div>
+
+<script>
+function loadCart(){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let total = 0;
+
+  document.getElementById("cartItems").innerHTML =
+    cart.map((item,i)=>{
+      let price = Math.floor(Math.random()*100+30);
+      total += price;
+
+      return `
+        <div class="card">
+          ${item} - ₹${price}
+          <button onclick="removeCart(${i})">Remove</button>
+        </div>
+      `;
+    }).join('');
+
+  document.getElementById("total").innerText = total;
+}
+
+function goCheckout(){
+  window.location.href="checkout.html";
+}
+</script>

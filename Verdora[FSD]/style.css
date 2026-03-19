@@ -1,0 +1,382 @@
+
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI', sans-serif;
+}
+
+/* BODY */
+body{
+  background:#f5f7f5;
+  color:#222;
+}
+
+/* HEADER (same as homepage) */
+.top-header{
+  background:#2e7d32;
+  color:white;
+  padding:15px 25px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 3px 10px rgba(0,0,0,0.15);
+}
+
+.logo{
+  font-size:22px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+
+/* CONTAINER */
+.page{
+  padding:20px;
+}
+
+/* CARD / BOX */
+.box, .card{
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom:20px;
+}
+
+/* BUTTON */
+button{
+  background:#2e7d32;
+  color:white;
+  border:none;
+  padding:8px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  background:#1b5e20;
+}
+
+/* TABLE (Delivery Dashboard) */
+.table{
+  width:90%;
+  margin:30px auto;
+  border-collapse:collapse;
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+.table th{
+  background:#2e7d32;
+  color:white;
+  padding:12px;
+}
+
+.table td{
+  padding:12px;
+  text-align:center;
+  border-bottom:1px solid #eee;
+}
+
+.table tr:hover{
+  background:#f1f8f4;
+}
+
+/* CHECKOUT PAGE */
+.checkout{
+  display:flex;
+  gap:20px;
+  padding:30px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.box h3{
+  margin-bottom:10px;
+}
+
+/* PAYMENT BUTTON */
+.pay-btn{
+  width:100%;
+  margin-top:10px;
+  padding:10px;
+  font-size:15px;
+  background:#fbc02d;
+  color:black;
+}
+
+.pay-btn:hover{
+  background:#f9a825;
+}
+
+/* INPUTS */
+input[type="radio"]{
+  margin-right:8px;
+}
+
+/* DASHBOARD STYLE */
+.dashboard{
+  padding:20px;
+}
+
+.stats{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.stat{
+  flex:1;
+  min-width:150px;
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  text-align:center;
+  box-shadow:0 3px 10px rgba(0,0,0,0.08);
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .checkout{
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .table{
+    width:100%;
+  }
+}
+
+/* ================= TRACK ORDER PAGE ================= */
+
+.page{
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+/* LEFT SIDE */
+.order-left{
+  flex:1;
+  min-width:300px;
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* RIGHT SIDE */
+.order-right{
+  flex:1;
+  min-width:300px;
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* TIMELINE */
+.timeline{
+  margin:20px 0;
+  display:flex;
+  justify-content:space-between;
+  position:relative;
+}
+
+.timeline div{
+  flex:1;
+  text-align:center;
+  padding:10px;
+  border-radius:20px;
+  background:#e0e0e0;
+  margin:0 5px;
+  font-size:13px;
+  position:relative;
+}
+
+.timeline div.active{
+  background:#2e7d32;
+  color:white;
+}
+
+/* LINE CONNECTOR */
+.timeline::before{
+  content:'';
+  position:absolute;
+  top:50%;
+  left:5%;
+  right:5%;
+  height:4px;
+  background:#ccc;
+  z-index:-1;
+}
+
+/* MAP BOX */
+.map{
+  height:300px;
+  background:#e8f5e9;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:12px;
+  color:#2e7d32;
+  font-weight:bold;
+  border:2px dashed #a5d6a7;
+}
+
+/* ================= WALLET PAGE ================= */
+
+.wallet{
+  padding:30px;
+  max-width:600px;
+  margin:30px auto;
+}
+
+/* BALANCE CARD */
+.balance{
+  background:#2e7d32;
+  color:white;
+  padding:25px;
+  border-radius:15px;
+  font-size:28px;
+  text-align:center;
+  font-weight:bold;
+  margin-bottom:20px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* TABLE IMPROVEMENT */
+.table{
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.table th{
+  background:#2e7d32;
+  color:white;
+  padding:12px;
+}
+
+.table td{
+  padding:12px;
+  text-align:center;
+  border-bottom:1px solid #eee;
+}
+
+.table tr:hover{
+  background:#f1f8f4;
+}
+
+/* ================= SEARCH BAR (COMMON FIX) ================= */
+
+.search-box{
+  display:flex;
+  gap:10px;
+}
+
+.search-box input{
+  padding:8px;
+  border-radius:6px;
+  border:none;
+  width:220px;
+}
+
+.search-box button{
+  background:#fbc02d;
+  color:black;
+}
+
+/* ================= NAV ICONS ================= */
+
+.nav-icons span{
+  margin-left:15px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.nav-icons span:hover{
+  text-decoration:underline;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:768px){
+  .page{
+    flex-direction:column;
+  }
+
+  .search-box input{
+    width:140px;
+  }
+}
+
+/* ================= LANDING PAGE ================= */
+
+.landing{
+  display:flex;
+  height:100vh;
+}
+
+/* LEFT SIDE */
+.landing-left{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:60px;
+}
+
+.landing-left h1{
+  font-size:48px;
+  color:#2e7d32;
+}
+
+.tagline{
+  margin:20px 0;
+  font-size:18px;
+  color:#555;
+  max-width:400px;
+}
+
+/* BUTTONS */
+.roles{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+  margin-top:20px;
+}
+
+.roles button{
+  width:250px;
+  padding:12px;
+  font-size:15px;
+}
+
+/* RIGHT SIDE */
+.landing-right{
+  flex:1;
+}
+
+.landing-right img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .landing{
+    flex-direction:column;
+  }
+
+  .landing-right{
+    height:300px;
+  }
+}
